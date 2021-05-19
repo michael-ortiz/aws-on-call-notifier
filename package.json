@@ -8,7 +8,8 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "init-db": "aws dynamodb batch-write-item --request-items file://lib/dynamodb/data/db.json"
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.104.0",
@@ -21,7 +22,13 @@
     "typescript": "~3.9.7"
   },
   "dependencies": {
+    "@aws-cdk/aws-dynamodb": "^1.104.0",
+    "@aws-cdk/aws-events": "^1.104.0",
+    "@aws-cdk/aws-events-targets": "^1.104.0",
+    "@aws-cdk/aws-iam": "^1.104.0",
+    "@aws-cdk/aws-lambda": "^1.104.0",
     "@aws-cdk/core": "1.104.0",
+    "dot-env": "0.0.1",
     "source-map-support": "^0.5.16"
   }
 }

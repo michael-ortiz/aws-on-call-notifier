@@ -107,8 +107,8 @@ The `db.json` contains the data that will be preloaded into the DynamoDB (non-re
         {   
             "PutRequest": {
                 "Item": {
-                		"user_id": { "S": "1" },
-                		"start_date": { "S": "yyyy-mm-dd" },
+                    "user_id": { "S": "1" },
+                    "start_date": { "S": "yyyy-mm-dd" },
                     "end_date": { "S": "yyyy-mm-dd" }
                 }
             }

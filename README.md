@@ -24,15 +24,19 @@ Services used:
   Invokes Lambda by using a Cron Schedule
 
 * **Lambda**
+
   Fetches schedule information and user information to send the notifications.
 
 * **DynamoDB**
+
   Stores Users and Schedule for on-call. 
 
 * **SES**
+
   AWS Service to send emails.
 
 * **SNS**
+
   AWS Service to send notifications. In our case, SMS text messages.
 
 

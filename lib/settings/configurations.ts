@@ -25,6 +25,10 @@ export const configurations = {
     /**
      * The source email address that should appear in the message.
      * 
+     * This needs to be a verified email. Read more about email verification here:
+     * 
+     * https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses-procedure.html
+     * 
      * Suggestion: 
      * Use <Sender Name>yourmail@mail.com format for better visualization.
      * 

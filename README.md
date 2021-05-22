@@ -2,6 +2,7 @@
 
 
 
+
 ## ⛱ Summary
 
 On-Call-Notifier is a small project that tries to automate the notification process for companies On-Call schedule for employees. The project is hosted in AWS and uses the following services to accomplish the notification delivery. This project uses CDK for Infrastructure as Code (IaC) and Clean Arquitecture pattern for the lambda code using TypeScript.
@@ -66,37 +67,24 @@ Be sure to enter your information on every `<CHANGE_ME>` as is required to begin
 
 ## 📚 Database Configuration
 
-Before you can start reciving notifications, you fill your on-call schedule. This project contains 2 main tables that contain vital information about the when and to who the notifications are going to be sent. The `db.json` contains the data that will be preloaded into the DynamoDB (non-relational) database. 
+Before you can start reciving notifications, you fill your on-call schedule. This project contains 2 main tables that contain vital information about the when and to who the notifications are going to be sent. The `users.json` and `schedule.json` contains the data that will be preloaded into the DynamoDB (non-relational) database. Please ensure to fill this with your resepctive information.
 
 
 
-**File Location**:
+**Files Location**:
 
 ````
-/lib/dynamodb/data/db.json
+/lib/dynamodb/data/user.json
+/lib/dynamodb/data/schedule.json
 ````
 
 
 
-### Structure
+### User
 
-```json
-{
-    "table_name": [
-        {   
-            "PutRequest": {
-                "Item": {
-                  ...
-                }
-            }
-        }
-    ]
-}
-```
+`users.json`
 
-
-
-### Preview of db.json:
+This file should contain a list of all the users that can be notified. Their contact information must be present for them to recieve a notifaction.  You can also disable a notification for a user if they prefer not to recieve them initially.  Also, keep in mind that the `user_id` must be included in the `schedule.js` item as its used as a reference key.
 
 ```json
 {
@@ -105,7 +93,7 @@ Before you can start reciving notifications, you fill your on-call schedule. Thi
             "PutRequest": {
                 "Item": { 
                     "user_id": { "S": "1" },
-                    "name": { "S": "Michael" },
+                    "name": { "S": "User Name" },
                     "phone_number": { "S": "+1XXX5550100" },
                     "email_address": { "S": "email@mail.com" },
                     "alerts": {
@@ -117,8 +105,23 @@ Before you can start reciving notifications, you fill your on-call schedule. Thi
                 }
             }
         }
-    ],
-    "on_call_schedule": [
+    ]
+}
+```
+
+
+
+### Schedule
+
+`schedule.json`
+
+
+
+The schedule table contains the information about the start date and end date of a user's on call responsability. The user will be notified on the `start_date` when the lambda runs.
+
+```json
+{
+  "on_call_schedule": [
         {   
             "PutRequest": {
                 "Item": {
@@ -254,6 +257,52 @@ In the project root folder, from your favorite Terminal, execute the following c
 ```shell
 npm run build
 cdk deploy
+```
+
+
+
+Once your deploy is successful, let's go ahead and load or user's data our DynamoDB table:
+
+```shell
+npm run load-users-data 
+```
+
+
+
+Once it processes, close the execution, and execute the next command to load the schedule data:
+
+```sh
+npm run load-schedule-data
+```
+
+
+
+You can validate that everything is working fine by loading into DynamoDB, a Schedule Item where the `start_date` equlals your current date in `yyyy-mm-dd` format and manually executing the lambda from the console.
+
+
+
+## ⏳ Testing Locally
+
+
+
+If you wish to run this project locally, you can do so using the [SAM Local](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-invoke.html). You must make sure that the DynamoDB tables are loaded and there is at least an Item in the `on_call_schedule` table has an item where the `start_date` is your current date.
+
+
+
+To configure the local environment variables required by the lambda, find the `local.json` file:
+
+```
+functions/lambda-notifier/local.json
+```
+
+ Mainly, you must change the `SOURCE_EMAIL` to your corresponding verified email address.
+
+
+
+Once everything is configured, run the following command to start the lambda:
+
+```json
+npm run start:local-lambda
 ```
 
 

@@ -297,7 +297,7 @@ You can validate that everything is working fine by loading into DynamoDB, a Sch
 
 
 
-If you wish to run this project locally, you can do so using the [SAM Local](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-invoke.html). You must make sure that the DynamoDB tables are loaded and there is at least an Item in the `on_call_schedule` table has an item where the `start_date` is your current date.
+If you wish to run this project locally, you can do so by installing the [SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html). You must make sure that the DynamoDB tables are loaded and there is at least an Item in the `on_call_schedule` table has an item where the `start_date` is your current date.
 
 
 
@@ -307,7 +307,7 @@ To configure the local environment variables required by the lambda, find the `l
 functions/lambda-notifier/local.json
 ```
 
- Mainly, you must change the `SOURCE_EMAIL` to your corresponding verified email address.
+ Mainly, you must change the `SOURCE_EMAIL` to your corresponding [**verified**](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses-procedure.html) email address.
 
 
 
@@ -316,6 +316,12 @@ Once everything is configured, run the following command to start the lambda:
 ```json
 npm run start:local-lambda
 ```
+
+
+
+Read more about running local lambdas here:
+
+https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-invoke.html
 
 
 

@@ -238,6 +238,18 @@ The users alert preference.
 
 
 
+## ✅ Verify Email Address
+
+In order to recieve email messages with the SES service, you must verify your email in your AWS Console.
+
+
+
+Follow the instructions in the official documentation:
+
+https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses-procedure.html
+
+
+
 ## 🚀 Install & Deploy Instructions ⛅️
 
 

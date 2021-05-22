@@ -3,7 +3,7 @@ import * as lambda from '@aws-cdk/aws-lambda';
 import * as dynamodb from '@aws-cdk/aws-dynamodb';
 import * as path from 'path';
 
-import { environmentProperties } from '../utils/properties'
+import { environmentProperties } from '../commons/properties'
 import { Policy, PolicyStatement, Effect } from '@aws-cdk/aws-iam';
 import { DynamoDB } from '../dynamodb/dynamodb';
 

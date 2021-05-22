@@ -28,6 +28,7 @@
     "@aws-cdk/aws-iam": "^1.104.0",
     "@aws-cdk/aws-lambda": "^1.104.0",
     "@aws-cdk/core": "1.104.0",
+    "aws-sdk": "^2.912.0",
     "dot-env": "0.0.1",
     "source-map-support": "^0.5.16"
   }

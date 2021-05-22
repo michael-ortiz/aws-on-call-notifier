@@ -5,8 +5,8 @@
                 "Item": { 
                     "user_id": { "S": "1" },
                     "name": { "S": "Michael" },
-                    "phone_number": { "S": "+17875860629" },
-                    "email_address": { "S": "michael.ortiz.porrata@gmail.com" },
+                    "phone_number": { "S": "+1787XXXXXXX" },
+                    "email_address": { "S": "mail@example.com" },
                     "alerts": { 
                         "M": {
                             "email": { "BOOL": true },
@@ -21,8 +21,8 @@
         {   
             "PutRequest": {
                 "Item": {
-                    "end_date": { "S": "2021-05-20" },
-                    "start_date": { "S": "2021-05-20" },
+                    "end_date": { "S": "yyyy-mm-dd" },
+                    "start_date": { "S": "yyyy-mm-dd" },
                     "user_id": { "S": "1" }
                 }
             }

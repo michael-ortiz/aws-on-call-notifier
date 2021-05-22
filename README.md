@@ -3,7 +3,7 @@
 
 
 
-## ⛱ Summary
+## Summary Intruduction
 
 On-Call-Notifier is a small project that tries to automate the notification process for companies On-Call schedule for employees. The project is hosted in AWS and uses the following services to accomplish the notification delivery. This project uses CDK for Infrastructure as Code (IaC) and Clean Arquitecture pattern for the lambda code using TypeScript.
 

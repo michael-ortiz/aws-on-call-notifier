@@ -1,0 +1,13 @@
+{
+    "on_call_schedule": [
+        {   
+            "PutRequest": {
+                "Item": {
+                    "end_date": { "S": "yyyy-mm-dd" },
+                    "start_date": { "S": "yyyy-mm-dd" },
+                    "user_id": { "S": "1" }
+                }
+            }
+        }
+    ]
+}

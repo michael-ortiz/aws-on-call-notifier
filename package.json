@@ -5,11 +5,13 @@
     "on-call-notifier": "bin/on-call-notifier.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run init-db",
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "init-db": "aws dynamodb batch-write-item --request-items file://lib/dynamodb/data/db.json"
+    "load-users-data": "aws dynamodb batch-write-item --request-items file://lib/dynamodb/data/users.json",
+    "load-schedule-data": "aws dynamodb batch-write-item --request-items file://lib/dynamodb/data/schedule.json",
+    "start-local": "cd functions/lambda-notifier && sam local invoke  --env-vars local.json NotifierLambda"
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.104.0",

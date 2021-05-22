@@ -4,7 +4,7 @@
             "PutRequest": {
                 "Item": { 
                     "user_id": { "S": "1" },
-                    "name": { "S": "Michael" },
+                    "name": { "S": "John Doe" },
                     "phone_number": { "S": "+1787XXXXXXX" },
                     "email_address": { "S": "mail@example.com" },
                     "alerts": { 
@@ -13,17 +13,6 @@
                             "sms": { "BOOL": true }
                         } 
                     }
-                }
-            }
-        }
-    ],
-    "on_call_schedule": [
-        {   
-            "PutRequest": {
-                "Item": {
-                    "end_date": { "S": "yyyy-mm-dd" },
-                    "start_date": { "S": "yyyy-mm-dd" },
-                    "user_id": { "S": "1" }
                 }
             }
         }

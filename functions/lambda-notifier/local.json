@@ -1,0 +1,10 @@
+{
+    "Parameters": {
+      "USERS_TABLE": "on_call_users",
+      "SCHEDULE_TABLE": "on_call_schedule",
+      "SOURCE_EMAIL": "example@mail.com",
+      "EMAIL_SUBJECT": "On-Call Notifier Subject",
+      "EMAIL_BODY": "On-Call Notifier <p>Message Body</p>",
+      "SMS_MESSAGE": "On-Call Notifier Test Message"
+    }
+  }

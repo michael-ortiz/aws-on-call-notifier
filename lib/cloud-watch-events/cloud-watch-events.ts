@@ -2,6 +2,7 @@ import * as cdk from '@aws-cdk/core';
 import * as lambda from '@aws-cdk/aws-lambda';
 import { LambdaFunction as LambdaFunctionTarget } from '@aws-cdk/aws-events-targets';
 import { Rule, Schedule } from '@aws-cdk/aws-events';
+import { configurations } from '../settings/configurations';
 
 export class CloudWatchEvents {
 
@@ -21,7 +22,7 @@ export class CloudWatchEvents {
     private createScheduleCronRule(scope: cdk.Construct, lambdaFunction: lambda.Function): Rule {
 
         const rule: Rule = new Rule(scope, 'LambdaScheduleCronRule', {
-            schedule: Schedule.cron({ minute: '0', hour: '8' }),
+            schedule: Schedule.expression(`cron(${configurations.SCHEDULE_CRON_EXPRESSION})`),
             targets: [new LambdaFunctionTarget(lambdaFunction)],
         });
 

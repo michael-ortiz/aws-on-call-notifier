@@ -1,7 +1,7 @@
 import * as cdk from '@aws-cdk/core';
 import * as dynamodb from '@aws-cdk/aws-dynamodb';
 import { RemovalPolicy } from '@aws-cdk/core';
-import { environmentProperties } from '../commons/properties'
+import { configurations } from '../settings/configurations';
 
 export class DynamoDB {
 
@@ -20,7 +20,7 @@ export class DynamoDB {
     private createUsersTable(scope: cdk.Construct): dynamodb.Table {
 
         const table: dynamodb.Table = new dynamodb.Table(scope, 'UsersTable', {
-            tableName: environmentProperties.USERS_TABLE,
+            tableName: configurations.USERS_TABLE,
             partitionKey: { name: 'user_id', type: dynamodb.AttributeType.STRING },
             removalPolicy: RemovalPolicy.DESTROY
         });
@@ -35,7 +35,7 @@ export class DynamoDB {
     private createScheduleTable(scope: cdk.Construct): dynamodb.Table {
 
         const table: dynamodb.Table = new dynamodb.Table(scope, 'ScheduleTable', {
-            tableName: environmentProperties.SCHEDULE_TABLE,
+            tableName: configurations.SCHEDULE_TABLE,
             partitionKey: { name: 'start_date', type: dynamodb.AttributeType.STRING },
             removalPolicy: RemovalPolicy.DESTROY
         });

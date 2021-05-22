@@ -3,9 +3,9 @@ import * as lambda from '@aws-cdk/aws-lambda';
 import * as dynamodb from '@aws-cdk/aws-dynamodb';
 import * as path from 'path';
 
-import { environmentProperties } from '../commons/properties'
 import { Policy, PolicyStatement, Effect } from '@aws-cdk/aws-iam';
 import { DynamoDB } from '../dynamodb/dynamodb';
+import { configurations } from '../settings/configurations';
 
 export class LambdaFunction {
 
@@ -33,7 +33,7 @@ export class LambdaFunction {
             runtime: lambda.Runtime.NODEJS_12_X,
             handler: 'index.handler',
             code: lambda.Code.fromAsset(path.join(__dirname, '../../functions/lambda-notifier')),
-            environment: environmentProperties
+            environment: configurations
         });
 
         return fn;

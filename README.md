@@ -1,15 +1,14 @@
-# On-Call-Notifier
+# 📣 On-Call-Notifier 💌
 
 
 
+## ⛱ Summary
 
-## Summary
-
-On-Call-Notifier is a small project that tries to automate the notification process for companies On-Call schedule for employees. The project is hosted in AWS and uses the following services to accomplish the notification delivery:
-
+On-Call-Notifier is a small project that tries to automate the notification process for companies On-Call schedule for employees. The project is hosted in AWS and uses the following services to accomplish the notification delivery. This project uses CDK for Infrastructure as Code (IaC) and Clean Arquitecture pattern for the lambda code using TypeScript.
 
 
-## The Arquitecture
+
+## 🏗 The Arquitecture
 
 
 
@@ -21,7 +20,7 @@ Services used:
 
 * **Cloud Watch Events**
 
-  Invokes Lambda by using a Cron Schedule
+  Invokes Lambda by using a Cron Schedule.
 
 * **Lambda**
 
@@ -41,23 +40,37 @@ Services used:
 
 
 
-## Project Configuration
-
-The `configuration.json` file, contains the required configurations that you must enter in order to start sending notifications. This file can be found in the project root directory.
 
 
+## 🏎 Before we begin
 
-## Database Configuration
-
-This project contains 2 main tables that contain vital information. For the system to work correctly, you must pre-load this file.
+Please follow the instructions until the end to fully configure this project. All steps are required for a full deployment.
 
 
 
-The `db.json` contains the data that will be preloaded into the DynamoDB (non-relational) database. 
+## ⚙️ Project Settings Configuration
+
+The `configuration.ts` file, contains the required configurations that you must enter in order to start sending notifications.
+
+**File Location**:
+
+````
+lib/settings/configurations.ts
+````
 
 
 
-**Location**:
+Be sure to enter your information on every `<CHANGE_ME>` as is required to begin sending notifications.
+
+
+
+## 📚 Database Configuration
+
+Before you can start reciving notifications, you fill your on-call schedule. This project contains 2 main tables that contain vital information about the when and to who the notifications are going to be sent. The `db.json` contains the data that will be preloaded into the DynamoDB (non-relational) database. 
+
+
+
+**File Location**:
 
 ````
 /lib/dynamodb/data/db.json
@@ -65,7 +78,7 @@ The `db.json` contains the data that will be preloaded into the DynamoDB (non-re
 
 
 
-**Structure**
+### Structure
 
 ```json
 {
@@ -81,7 +94,9 @@ The `db.json` contains the data that will be preloaded into the DynamoDB (non-re
 }
 ```
 
-**Example**:
+
+
+### Preview of db.json:
 
 ```json
 {
@@ -117,7 +132,9 @@ The `db.json` contains the data that will be preloaded into the DynamoDB (non-re
 }
 ```
 
-**Schedule Object**
+
+
+### Schedule Object Example
 
 ```json
 {
@@ -155,12 +172,12 @@ The end date of the on-call duty in ISO 8601 date format.
 
 
 
-**User Object**
+### User Object Example
 
 ```json
 { 
   "user_id": { "S": "1" }, 
-  "name": { "S": "Michael" },
+  "name": { "S": "User name" },
   "phone_number": { "S": "+1XXX5550100" },
   "email_address": { "S": "email@mail.com" }, 
   "alerts": {
@@ -202,6 +219,8 @@ E.164 format phone number.  The user will receive an SMS notification to this ad
 
 Valid email address. The user will receive a email notification to this address if configured in the `alerts` section.
 
+*Supports*: `<Your Name>example@mail.com` format.
+
 *Type:* `String`
 
 ---
@@ -216,19 +235,21 @@ The users alert preference.
 
 
 
-## Install & Deploy Instructions
+## 🚀 Install & Deploy Instructions ⛅️
 
 
 
-Before we begin, you must ensure the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) and [CDK](https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html) are installed. 
-
-
+After passing all the previous stages, you must ensure the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) and [CDK](https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html) are installed. 
 
 As part of the configuration process, we need to make some adjustments to include the information required for notification.
 
 
 
-In the project root folder, from your Terminal, execute the following commands:
+Ensure you set your AWS Credentials. **If this is your first time**, please follow the following [instructions](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html):
+
+
+
+In the project root folder, from your favorite Terminal, execute the following commands:
 
 ```shell
 npm run build

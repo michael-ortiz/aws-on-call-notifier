@@ -5,8 +5,7 @@
 
 ## Summary Intruduction
 
-On-Call-Notifier is a small project that tries to automate the notification process for companies On-Call schedule for employees. The project is hosted in AWS and uses the following services to accomplish the notification delivery. This project uses CDK for Infrastructure as Code (IaC) and Clean Arquitecture pattern for the lambda code using TypeScript.
-
+On-Call-Notifier is a small project will remind employees when thie On-Call shift starts through email or mobile phone text messages (SMS). The project is completely serverless (no need to manage or provision servers) and is hosted in AWS. The project uses CDK for Infrastructure as Code (IaC) and Clean Arquitecture pattern for the processing lambda using TypeScript with Node.js.
 
 
 ## 🏗 The Arquitecture
@@ -17,27 +16,27 @@ On-Call-Notifier is a small project that tries to automate the notification proc
 
 
 
-Services used:
+**Services used and what they are used for:**
 
 * **Cloud Watch Events**
 
-  Invokes Lambda by using a Cron Schedule.
+  Invokes the notification Lambda by using a Cron Schedule.
 
 * **Lambda**
 
-  Fetches schedule information and user information to send the notifications.
+  Fetches schedule informationn for the current date. If there is a Schedule Item, user information will be fetched, which then triggers the notification process to notify the employee or user.
 
 * **DynamoDB**
 
-  Stores Users and Schedule for on-call. 
+  Stores User information and schedule data for on-call. 
 
 * **SES**
 
-  AWS Service to send emails.
+  AWS Service used to send email notifications.
 
 * **SNS**
 
-  AWS Service to send notifications. In our case, SMS text messages.
+  AWS Service used to to send text messages (SMS) notifications.
 
 
 

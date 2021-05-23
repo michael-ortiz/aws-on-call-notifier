@@ -5,7 +5,7 @@
 
 ## Summary Intruduction
 
-On-Call-Notifier is a small project will remind employees when thie On-Call shift starts through email or mobile phone text messages (SMS). The project is completely serverless (no need to manage or provision servers) and is hosted in AWS. The project uses CDK for Infrastructure as Code (IaC) and Clean Arquitecture pattern for the processing lambda using TypeScript with Node.js.
+On-Call-Notifier is a small project will remind employees when thie [On-Call](https://en.wikipedia.org/wiki/On-call) shift starts through email or text messages (SMS). The project is completely serverless (no need to manage or provision servers) and is hosted in AWS. The project uses CDK for Infrastructure as Code (IaC) and Clean Arquitecture pattern for the processing lambda using TypeScript with Node.js.
 
 
 ## 🏗 The Arquitecture

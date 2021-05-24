@@ -1,11 +1,13 @@
-# 📣 On-Call-Notifier 💌
+# 🔔 On-Call Notifier 📩
 
 
 
 
-## Summary Intruduction
+## Summary Introduction
 
-On-Call-Notifier is a small project will remind employees when thier [On-Call](https://en.wikipedia.org/wiki/On-call) shift starts through email or text messages (SMS). The project is completely serverless (no need to manage or provision servers) and is hosted in AWS. The project uses CDK for Infrastructure as Code (IaC) and Clean Arquitecture pattern for the processing lambda using TypeScript with Node.js.
+On-Call-Notifier is a small project will remind employees when their [On-Call](https://en.wikipedia.org/wiki/On-call) shift starts through email or text messages (SMS). This project is completely serverless (no need to manage or provision servers) and is hosted in AWS. We use AWS [CDK](https://aws.amazon.com/cdk/) to create the cloud infrastructure, and make use of [Clean Arquitecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) software design principles for the lambda code.
+
+
 
 
 ## 🏗 The Arquitecture
@@ -16,29 +18,29 @@ On-Call-Notifier is a small project will remind employees when thier [On-Call](h
 
 
 
-**Services used and what they are used for:**
+**AWS Services used and what they are used for:**
 
-* **Cloud Watch Events**
+* [**Cloud Watch Events**](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html)
 
-  Invokes the notification Lambda by using a Cron Schedule.
+  Invokes the *notifier lambda* automatically by using a cron expression. 
 
-* **Lambda**
+  https://docs.aws.amazon.com/lambda/latest/dg/services-cloudwatchevents-expressions.html
 
-  Fetches schedule informationn for the current date. If there is a Schedule Item, user information will be fetched, which then triggers the notification process to notify the employee or user.
+* [**Lambda**](https://aws.amazon.com/lambda/)
 
-* **DynamoDB**
+  Fetches schedule informationn for the current date. If there is a `Schedule` Item, user information will be fetched, which then triggers the notification process to notify the employee or user.
 
-  Stores User information and schedule data for on-call. 
+* [**DynamoDB**](https://aws.amazon.com/dynamodb/)
 
-* **SES**
+  A non-relational database that stores User information and schedule data for on-call. 
+
+* [**SES**](https://aws.amazon.com/ses/)
 
   AWS Service used to send email notifications.
 
-* **SNS**
+* [**SNS**](https://aws.amazon.com/sns)
 
-  AWS Service used to to send text messages (SMS) notifications.
-
-
+  AWS Service used to send text messages (SMS) notifications.
 
 
 
@@ -66,24 +68,24 @@ Be sure to enter your information on every `<CHANGE_ME>` as is required to begin
 
 ## 📚 Database Configuration
 
-Before you can start reciving notifications, you fill your on-call schedule. This project contains 2 main tables that contain vital information about the when and to who the notifications are going to be sent. The `users.json` and `schedule.json` contains the data that will be preloaded into the DynamoDB (non-relational) database. Please ensure to fill this with your resepctive information.
+Before you can start reciving notifications, you fill your on-call schedule. This project contains 2 main DynamoDB (non-relational) tables that contain the information about  **when** and to **whom** the notifications are going to be sent. The `users.json` and `schedule.json` files contain the data that will be preloaded into the DynamoDB database.  Be sure to fill this with your respective information
 
 
 
 **Files Location**:
 
 ````
-/lib/dynamodb/data/user.json
+/lib/dynamodb/data/users.json
 /lib/dynamodb/data/schedule.json
 ````
 
 
 
-### User
+### Users Data
 
 `users.json`
 
-This file should contain a list of all the users that can be notified. Their contact information must be present for them to recieve a notifaction.  You can also disable a notification for a user if they prefer not to recieve them initially.  Also, keep in mind that the `user_id` must be included in the `schedule.js` item as its used as a reference key.
+This file should contain a list of all the users that can be notified. Their contact information must be present for them to receive a notification.  You can also disable a notification for a user if they prefer not to receive them initially.  Also, keep in mind that the `user_id` must be included in the `schedule.json` item as its used as a reference key.
 
 ```json
 {
@@ -110,13 +112,11 @@ This file should contain a list of all the users that can be notified. Their con
 
 
 
-### Schedule
+### Schedule Data
 
 `schedule.json`
 
-
-
-The schedule table contains the information about the start date and end date of a user's on call responsability. The user will be notified on the `start_date` when the lambda runs.
+The schedule table contains the information about the start  and end dates of a user's on call shift. The user will be notified on the `start_date` when the lambda runs.
 
 ```json
 {
@@ -136,7 +136,7 @@ The schedule table contains the information about the start date and end date of
 
 
 
-### Schedule Object Example
+### Schedule Item
 
 ```json
 {
@@ -150,7 +150,7 @@ The schedule table contains the information about the start date and end date of
 
 `user_id`
 
-A unique ID for the user.
+A unique ID for the user or employee.
 
 *Type:* `String`
 
@@ -158,7 +158,7 @@ A unique ID for the user.
 
 `start_date`
 
-The start date of the on-call duty in ISO 8601 date format.
+The start date of the on-call shift in ISO 8601 date format.
 
 *Type:* `String`
 
@@ -166,7 +166,7 @@ The start date of the on-call duty in ISO 8601 date format.
 
 `end_date`
 
-The end date of the on-call duty in ISO 8601 date format.
+The end date of the on-call shift in ISO 8601 date format.
 
 *Type:* `String`
 
@@ -174,7 +174,7 @@ The end date of the on-call duty in ISO 8601 date format.
 
 
 
-### User Object Example
+### User Item
 
 ```json
 { 
@@ -219,7 +219,7 @@ E.164 format phone number.  The user will receive an SMS notification to this ad
 
 `email_address`
 
-Valid email address. The user will receive a email notification to this address if configured in the `alerts` section.
+A [verified](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses-procedure.html) email address. The user will receive a email notification to this address if configured in the `alerts` section.
 
 *Supports*: `<Your Name>example@mail.com` format.
 
@@ -229,7 +229,7 @@ Valid email address. The user will receive a email notification to this address 
 
 `alerts`
 
-The users alert preference.
+The users alert preferences.
 
 *Type:* `Map<String, Boolean>`
 
@@ -253,17 +253,19 @@ https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses-pro
 
 
 
-After passing all the previous stages, you must ensure the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) and [CDK](https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html) are installed. 
-
-As part of the configuration process, we need to make some adjustments to include the information required for notification.
+After passing all the previous stages you are now ready to begin the deployment stage!
 
 
 
-Ensure you set your AWS Credentials. **If this is your first time**, please follow the following [instructions](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html):
+**Prerequisites**: 
+
+If this is your first time using CDK, **please follow** the pre installation instruction in the official documentation.
+
+https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html#getting_started_prerequisites
 
 
 
-In the project root folder, from your favorite Terminal, execute the following commands:
+Next, in the project root folder, from your favorite Terminal, execute the following commands:
 
 ```shell
 npm run build
@@ -280,7 +282,7 @@ npm run load-users-data
 
 
 
-Once it processes, close the execution, and execute the next command to load the schedule data:
+Now, close the execution output, and execute the next command:
 
 ```sh
 npm run load-schedule-data
@@ -288,7 +290,7 @@ npm run load-schedule-data
 
 
 
-You can validate that everything is working fine by loading into DynamoDB, a Schedule Item where the `start_date` equlals your current date in `yyyy-mm-dd` format and manually executing the lambda from the console.
+You can validate that everything is working fine by adding an Item into DynamoDB a Schedule Item where the `start_date` = your current date in `yyyy-mm-dd` format. Manually execute the lambda from the console.
 
 
 

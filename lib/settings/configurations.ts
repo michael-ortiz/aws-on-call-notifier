@@ -9,6 +9,8 @@ export const configurations = {
     * lambda should be triggered in GMT timezone.
     * 
     * The given expression gets execcuted every day at 14:00:00 GMT.
+    * 
+    * Change this value to your desired configuration.
     */
     SCHEDULE_CRON_EXPRESSION: "0 14 * * ? *",
 

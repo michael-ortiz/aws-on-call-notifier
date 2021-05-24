@@ -32,7 +32,7 @@ On-Call-Notifier is a small project will remind employees when their [On-Call](h
 
 * [**DynamoDB**](https://aws.amazon.com/dynamodb/)
 
-  A non-relational database that stores User information and schedule data for on-call. 
+  A non-relational database that will store the users and on-call schedule information. 
 
 * [**SES**](https://aws.amazon.com/ses/)
 

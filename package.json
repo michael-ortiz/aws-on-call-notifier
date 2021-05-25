@@ -5,7 +5,7 @@
     "on-call-notifier": "bin/on-call-notifier.js"
   },
   "scripts": {
-    "build": "tsc && npm run init-db",
+    "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
@@ -17,9 +17,9 @@
     "@aws-cdk/assert": "1.104.0",
     "@types/jest": "^26.0.10",
     "@types/node": "10.17.27",
+    "aws-cdk": "1.104.0",
     "jest": "^26.4.2",
     "ts-jest": "^26.2.0",
-    "aws-cdk": "1.104.0",
     "ts-node": "^9.0.0",
     "typescript": "~3.9.7"
   },

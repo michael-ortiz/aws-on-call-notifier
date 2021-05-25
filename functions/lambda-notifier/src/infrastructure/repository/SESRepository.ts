@@ -6,23 +6,23 @@ export class SESRepository implements NotificationRepositoryInterface {
  
     constructor(private ses : SES) {}
 
-    notify(emailAddress: string) : Promise<PromiseResult<SES.SendEmailResponse, AWSError>> {
+    notify(address: string, message: string, subject?: string) : Promise<PromiseResult<SES.SendEmailResponse, AWSError>> {
         
         const params : SES.SendEmailRequest = {
             Destination: {
               ToAddresses: [
-                emailAddress
+                address
               ]
             },
             Message: {
               Subject: {
                   Charset: 'UTF-8',
-                  Data: process.env.EMAIL_SUBJECT!
+                  Data: subject!
               },
               Body: { 
                 Html: {
                  Charset: "UTF-8",
-                 Data: process.env.EMAIL_BODY!
+                 Data: message
                 }
                }
               },

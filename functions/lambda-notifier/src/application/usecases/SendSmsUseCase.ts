@@ -1,5 +1,6 @@
 import { User } from "../../domain/entities/User";
 import { NotificationRepositoryInterface } from "../interfaces/NotificationRepositoryInterface";
+import { SmsMessageTemplate } from "../templates/MessageTemplates";
 
 export class SendSmsUseCase {
 
@@ -16,7 +17,7 @@ export class SendSmsUseCase {
             return false;
         }
 
-        await this.repository.notify(this.user.phoneNumber);
+        await this.repository.notify(this.user.phoneNumber, SmsMessageTemplate.message);
 
         return true;
     }

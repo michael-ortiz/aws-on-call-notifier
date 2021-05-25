@@ -1,5 +1,6 @@
 import { User } from "../../domain/entities/User";
 import { NotificationRepositoryInterface } from "../interfaces/NotificationRepositoryInterface";
+import { EmailMessageTemplate } from "../templates/MessageTemplates";
 
 export class SendEmailUseCase {
 
@@ -16,7 +17,7 @@ export class SendEmailUseCase {
             return false;
         }
 
-        await this.repository.notify(this.user.emailAddress);
+        await this.repository.notify(this.user.emailAddress, EmailMessageTemplate.htmlBody, EmailMessageTemplate.subject);
 
         return true;
     }

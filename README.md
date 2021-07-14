@@ -5,12 +5,12 @@
 
 ## Summary Introduction
 
-On-Call-Notifier is a small project will remind employees when their [On-Call](https://en.wikipedia.org/wiki/On-call) shift starts through email or text messages (SMS). This project is completely serverless (no need to manage or provision servers) and is hosted in AWS. We use AWS [CDK](https://aws.amazon.com/cdk/) to create the cloud infrastructure, and make use of [Clean Arquitecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) software design principles for the lambda code.
+On-Call-Notifier is a small project will remind employees when their [On-Call](https://en.wikipedia.org/wiki/On-call) shift starts through email or text messages (SMS). This project is completely serverless (no need to manage or provision servers) and is hosted in AWS. We use AWS [CDK](https://aws.amazon.com/cdk/) to create the cloud infrastructure, and make use of [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) software design principles for the lambda code.
 
 
 
 
-## 🏗 The Arquitecture
+## 🏗 The Architecture
 
 
 
@@ -28,7 +28,7 @@ On-Call-Notifier is a small project will remind employees when their [On-Call](h
 
 * [**Lambda**](https://aws.amazon.com/lambda/)
 
-  Fetches schedule informationn for the current date. If there is a `Schedule` Item, user information will be fetched, which then triggers the notification process to notify the employee or user.
+  Fetches schedule information for the current date. If there is a `Schedule` Item, user information will be fetched, which then triggers the notification process to notify the employee or user.
 
 * [**DynamoDB**](https://aws.amazon.com/dynamodb/)
 
@@ -52,7 +52,7 @@ Please follow the instructions until the end to fully configure this project. Al
 
 ## ⚙️ Project Settings Configuration
 
-The `configuration.ts` file, contains the required configurations that you must enter in order to start sending notifications.
+The `configurations.ts` file, contains the required configurations that you must enter in order to start sending notifications.
 
 **File Location**:
 
@@ -68,7 +68,7 @@ Be sure to enter your information on every `<CHANGE_ME>` as is required to begin
 
 ## 📚 Database Configuration
 
-Before you can start reciving notifications, you fill your on-call schedule. This project contains 2 main DynamoDB (non-relational) tables that contain the information about  **when** and to **whom** the notifications are going to be sent. The `users.json` and `schedule.json` files contain the data that will be preloaded into the DynamoDB database.  Be sure to fill this with your respective information
+Before you can start receiving notifications, you fill your on-call schedule. This project contains 2 main DynamoDB (non-relational) tables that contain the information about  **when** and to **whom** the notifications are going to be sent. The `users.json` and `schedule.json` files contain the data that will be preloaded into the DynamoDB database.  Be sure to fill this with your respective information
 
 
 

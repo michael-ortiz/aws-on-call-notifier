@@ -13,4 +13,4 @@ workflows:
           # Relevant tags can be found on the CircleCI Developer Hub
           # https://circleci.com/developer/images/image/cimg/node
 
-- run: cdk deploy
+      - run: cdk deploy

@@ -15,10 +15,14 @@ jobs:
             echo 'Hello World!'
             echo 'This is the delivery pipeline'
       - run:
-          name: The Second Step
+          name: Install Phase
+          command: |
+            npm i
+      - run:
+          name: Synth
           command: |
             cdk synth
       - run:
-          name: The third Step
+          name: Deploy
           command: |
             cdk deploy

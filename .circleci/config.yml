@@ -3,6 +3,7 @@ version: 2.1
 
 orbs:
   node: circleci/node@4.1
+  cdk: signavio/cdk-orb@0.7.2
 
 jobs:
   build:
@@ -15,7 +16,6 @@ jobs:
           override-ci-command: npm install
       - run: npm run test
       - run:
-          name: The First Step
+          name: CDK Synth
           command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
+            cdk synth

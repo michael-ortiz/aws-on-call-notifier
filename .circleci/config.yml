@@ -19,4 +19,3 @@ jobs:
           name: CDK Synth
           command: |
             npm run cdk synth
-            npm run cdk deploy
